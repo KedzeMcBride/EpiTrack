@@ -152,7 +152,38 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
 
+              const SizedBox(height: 30),
+
               // or continue with
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey[400],
+                        thickness: 1,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        'Or continue with',
+                        style: TextStyle(
+                          color: Colors.grey[700],
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey[400],
+                        thickness: 1,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
               // google or apple
 
