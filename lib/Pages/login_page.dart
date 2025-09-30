@@ -22,8 +22,8 @@ class _LoginPageState extends State<LoginPage> {
               // logo
               Image.asset(
                 'lib/images/logo.png',
-                height: 150, // Adjust height as needed
-                width: 150,  // Adjust width as needed
+                height: 100, // Adjust height as needed
+                width: 100,  // Adjust width as needed
               ),
               const SizedBox(height: 50),
 
@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-
+              const SizedBox(height: 15),
               // forgot password
 
               // sign in button
