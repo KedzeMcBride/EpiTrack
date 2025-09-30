@@ -1,29 +1,50 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget{
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.grey,
-      body: Column(children: [
-        //logo
+    return Scaffold(
+      backgroundColor: Colors.grey[300],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              const SizedBox(height: 50,),
+              // logo
+              Image.asset(
+                'lib/images/logo.png',
+                height: 100, // Adjust height as needed
+                width: 100,  // Adjust width as needed
+              ),
+              const SizedBox(height: 50,),
 
-        //welcome back
+              // welcome back
+                Text(
+                "Welcome Back You've been Missed",
+                style: TextStyle(
+                  color: Colors.grey[700],
+                  fontSize: 16,
+                ),
+              ),
+              // user text-field
 
-        //user textfield
+              // password text-field
 
-        //password textfield
+              // forgot password
 
-        //forgot password
+              // sign in button
 
-        //sigin button
+              // or continue with
 
-        //or continue with
+              // google or apple
 
-        //google or apple
-      ],),
+              // register option
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
