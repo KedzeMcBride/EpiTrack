@@ -123,6 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 25),
 
                 // sign in button
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Container(
@@ -187,6 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 30),
 
                 // google or apple buttons
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Row(
