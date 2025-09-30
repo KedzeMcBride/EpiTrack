@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +51,45 @@ class LoginPage extends StatelessWidget {
                     fillColor: Colors.grey.shade200,
                     filled: true,
                     hintText: 'Username',
+                    suffixIcon: Icon(
+                      Icons.person,
+                      color: Colors.grey[600],
+                    ),
                   ),
                 ),
               ),
 
+              const SizedBox(height: 15),
+
               // password text-field
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: TextField(
+                  obscureText: _obscurePassword,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey.shade400),
+                    ),
+                    fillColor: Colors.grey.shade200,
+                    filled: true,
+                    hintText: 'Password',
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                        color: Colors.grey[600],
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ),
 
               // forgot password
 
