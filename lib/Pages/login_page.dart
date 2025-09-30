@@ -101,9 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     GestureDetector(
                       onTap: () {
-
                         // Add your forgot password logic here
-
                         print('Forgot Password tapped');
                       },
                       child: Text(
@@ -128,9 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-
                       // Add your sign in logic here
-
                       print('Sign In button pressed');
                     },
                     style: ElevatedButton.styleFrom(
@@ -185,9 +181,95 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
 
-              // google or apple
+              const SizedBox(height: 30),
+
+              // google or apple buttons
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Google button
+                    GestureDetector(
+                      onTap: () {
+
+                        // Add Google sign in logic here
+
+                        print('Google sign in tapped');
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.grey[200],
+                        ),
+                        child: Image.asset(
+                          'lib/images/google.png',
+                          height: 40,
+                          width: 40,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(width: 20),
+
+                    // Apple button
+                    GestureDetector(
+                      onTap: () {
+
+                        // Add Apple sign in logic here
+
+                        print('Apple sign in tapped');
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.grey[200],
+                        ),
+                        child: Image.asset(
+                          'lib/images/apple.png',
+                          height: 40,
+                          width: 40,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 40),
 
               // register option
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Don't have an account?",
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  GestureDetector(
+                    onTap: () {
+                      // Add your register navigation logic here
+                      print('Register tapped');
+                    },
+                    child: Text(
+                      'Register',
+                      style: TextStyle(
+                        color: Colors.blue[700],
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
