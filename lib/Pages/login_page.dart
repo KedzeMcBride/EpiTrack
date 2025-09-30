@@ -18,14 +18,14 @@ class _LoginPageState extends State<LoginPage> {
         child: Center(
           child: Column(
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 25),
               // logo
               Image.asset(
                 'lib/images/logo.png',
                 height: 100, // Adjust height as needed
                 width: 100,  // Adjust width as needed
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 25),
 
               // welcome back
               Text(
@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
                   fontSize: 16,
                 ),
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height: 10),
 
               // user text-field
               Padding(
@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
 
-              const SizedBox(height: 15),
+              const SizedBox(height: 10),
 
               // password text-field
               Padding(
