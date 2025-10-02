@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Authentication Logic/registration_controller.dart';
 
+
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
 
@@ -12,6 +13,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final RegistrationController _controller = RegistrationController();
 
   void _registerUser() async {
+    if (!_controller.isFormValid) {
+      _showSnackBar('Please fix validation errors', false);
+      return;
+    }
+
+    setState(() {});
+
     final result = await _controller.register();
 
     if (result.success) {
@@ -33,7 +41,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close success dialog
-                Navigator.of(context).pop(); // Go back to login page
+                _navigateToLogin(); // Navigate to login page
               },
               child: const Text('OK'),
             ),
@@ -43,14 +51,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
+  void _navigateToLogin() {
+    if (context.mounted) {
+      Navigator.pushReplacementNamed(context, '/login');
+    }
+  }
+
   void _showSnackBar(String message, bool isSuccess) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: isSuccess ? Colors.green : Colors.red,
-        duration: const Duration(seconds: 3),
-      ),
-    );
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: isSuccess ? Colors.green : Colors.red,
+          duration: const Duration(seconds: 3),
+        ),
+      );
+    }
   }
 
   @override
@@ -145,7 +161,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                 const SizedBox(height: 40),
 
-                // login option
+                // login option - NOW PROPERLY LINKED!
                 _buildLoginOption(),
 
                 const SizedBox(height: 20),
@@ -414,10 +430,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
             fontSize: 14,
           ),
         ),
-
         const SizedBox(width: 5),
         GestureDetector(
-          onTap: _controller.isLoading ? null : () => Navigator.pop(context),
+          onTap: _controller.isLoading ? null : _navigateToLogin,
           child: Text(
             'Login',
             style: TextStyle(

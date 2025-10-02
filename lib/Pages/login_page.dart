@@ -93,8 +93,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _navigateToRegister() {
-    // Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationPage()));
-    print('Navigate to registration page');
+    Navigator.pushReplacementNamed(context, '/register');
   }
 
   void _showSnackBar(String message, bool isSuccess) {

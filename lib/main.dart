@@ -3,11 +3,10 @@ import 'Pages/login_page.dart';
 import 'Pages/registration_page.dart';
 
 void main() {
-  runApp(const MyApp()); // Remove const from here
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // Remove const constructor
   const MyApp({super.key});
 
   @override
