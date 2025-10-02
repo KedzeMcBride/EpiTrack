@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Pages/login_page.dart';
 import 'Pages/registration_page.dart';
+import 'Pages/patients_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'EpiTrack',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
+      initialRoute: '/patients',
       routes: {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegistrationPage(),
+        '/patients': (context) => const PatientsPage(),
       },
     );
   }
