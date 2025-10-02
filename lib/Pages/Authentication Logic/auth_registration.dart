@@ -1,4 +1,5 @@
 class AuthService {
+  // Validation methods
   static String? validateFullName(String? name) {
     if (name == null || name.isEmpty) {
       return 'Full name is required';
@@ -46,87 +47,47 @@ class AuthService {
     required String email,
     required String password,
   }) async {
-    // Validate all fields
-    final fullNameError = validateFullName(fullName);
-    final emailError = validateEmail(email);
-    final passwordError = validatePassword(password);
-
-    if (fullNameError != null || emailError != null || passwordError != null) {
-      return AuthResult(
-        success: false,
-        errorMessage: 'Please fix validation errors',
-        validationErrors: {
-          'fullName': fullNameError,
-          'email': emailError,
-          'password': passwordError,
-        },
-      );
-    }
-
     try {
+      // Simulate API call delay
       await Future.delayed(const Duration(seconds: 2));
 
-      // TODO: Replace with your actual registration logic
-      // Example with Firebase Auth:
-      /*
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      // Save additional user data to Firestore
-      await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).set({
-        'fullName': fullName,
-        'email': email,
-        'createdAt': FieldValue.serverTimestamp(),
-      });
-      */
-
-      return AuthResult(success: true);
+      // Replace with your actual registration logic
+      if (fullName.isNotEmpty && email.contains('@') && password.length >= 6) {
+        return AuthResult.success('Registration successful!');
+      } else {
+        return AuthResult.error('Registration failed');
+      }
     } catch (e) {
-      return AuthResult(
-        success: false,
-        errorMessage: e.toString(),
-      );
+      return AuthResult.error('Registration failed: $e');
     }
   }
 
   // Social registration methods
   static Future<AuthResult> registerWithGoogle() async {
     try {
-      // TODO: Implement Google sign-in
       await Future.delayed(const Duration(seconds: 2));
-      return AuthResult(success: true);
+      // Implement actual Google Sign In logic
+      return AuthResult.success('Google registration successful!');
     } catch (e) {
-      return AuthResult(
-        success: false,
-        errorMessage: 'Google registration failed: ${e.toString()}',
-      );
+      return AuthResult.error('Google registration failed: $e');
     }
   }
 
   static Future<AuthResult> registerWithApple() async {
     try {
-      // TODO: Implement Apple sign-in
       await Future.delayed(const Duration(seconds: 2));
-      return AuthResult(success: true);
+      // Implement actual Apple Sign In logic
+      return AuthResult.success('Apple registration successful!');
     } catch (e) {
-      return AuthResult(
-        success: false,
-        errorMessage: 'Apple registration failed: ${e.toString()}',
-      );
+      return AuthResult.error('Apple registration failed: $e');
     }
   }
 }
 
 class AuthResult {
   final bool success;
-  final String? errorMessage;
-  final Map<String, String?>? validationErrors;
+  final String message;
 
-  AuthResult({
-    required this.success,
-    this.errorMessage,
-    this.validationErrors,
-  });
+  AuthResult.success(this.message) : success = true;
+  AuthResult.error(this.message) : success = false;
 }

@@ -15,9 +15,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
     final result = await _controller.register();
 
     if (result.success) {
+      _showSnackBar(result.message, true);
       _showSuccessDialog();
     } else {
-      _showErrorDialog(result.errorMessage ?? 'Registration failed');
+      _showSnackBar(result.message, false);
     }
   }
 
@@ -42,23 +43,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
-  void _showErrorDialog(String message) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Registration Failed'),
-          content: Text(message),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
+  void _showSnackBar(String message, bool isSuccess) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: isSuccess ? Colors.green : Colors.red,
+        duration: const Duration(seconds: 3),
+      ),
     );
   }
 
@@ -79,7 +70,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
               children: [
                 const SizedBox(height: 25),
                 // logo
-
                 Image.asset(
                   'lib/images/logo.png',
                   height: 100,
@@ -183,7 +173,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             controller: controller,
             keyboardType: keyboardType,
             decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
+              enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
               ),
               focusedBorder: OutlineInputBorder(
@@ -228,7 +218,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             controller: controller,
             obscureText: obscureText,
             decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
+              enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
               ),
               focusedBorder: OutlineInputBorder(
@@ -344,19 +334,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 : () async {
               final result = await _controller.registerWithGoogle();
               if (result.success) {
+                _showSnackBar(result.message, true);
                 _showSuccessDialog();
               } else {
-                _showErrorDialog(result.errorMessage!);
+                _showSnackBar(result.message, false);
               }
             },
             child: Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.white),
                 borderRadius: BorderRadius.circular(12),
                 color: Colors.grey[200],
               ),
-              child: Image.asset(
+              child: _controller.isLoading
+                  ? const SizedBox(
+                height: 40,
+                width: 40,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
+              )
+                  : Image.asset(
                 'lib/images/google.png',
                 height: 40,
                 width: 40,
@@ -371,19 +370,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 : () async {
               final result = await _controller.registerWithApple();
               if (result.success) {
+                _showSnackBar(result.message, true);
                 _showSuccessDialog();
               } else {
-                _showErrorDialog(result.errorMessage!);
+                _showSnackBar(result.message, false);
               }
             },
             child: Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.white),
                 borderRadius: BorderRadius.circular(12),
                 color: Colors.grey[200],
               ),
-              child: Image.asset(
+              child: _controller.isLoading
+                  ? const SizedBox(
+                height: 40,
+                width: 40,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
+              )
+                  : Image.asset(
                 'lib/images/apple.png',
                 height: 40,
                 width: 40,
@@ -406,6 +414,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             fontSize: 14,
           ),
         ),
+
         const SizedBox(width: 5),
         GestureDetector(
           onTap: _controller.isLoading ? null : () => Navigator.pop(context),

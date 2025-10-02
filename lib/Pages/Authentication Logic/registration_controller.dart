@@ -58,14 +58,10 @@ class RegistrationController with ChangeNotifier {
   // Main registration function
   Future<AuthResult> register() async {
     if (!isFormValid) {
-      return AuthResult(
-        success: false,
-        errorMessage: 'Please fix validation errors',
-      );
+      return AuthResult.error('Please fix validation errors');
     }
 
-    _isLoading = true;
-    notifyListeners();
+    _setLoading(true);
 
     final result = await AuthService.registerUser(
       fullName: fullNameController.text.trim(),
@@ -73,35 +69,33 @@ class RegistrationController with ChangeNotifier {
       password: passwordController.text,
     );
 
-    _isLoading = false;
-    notifyListeners();
-
+    _setLoading(false);
     return result;
   }
 
   // Social registration
   Future<AuthResult> registerWithGoogle() async {
-    _isLoading = true;
-    notifyListeners();
+    _setLoading(true);
 
     final result = await AuthService.registerWithGoogle();
 
-    _isLoading = false;
-    notifyListeners();
-
+    _setLoading(false);
     return result;
   }
 
   Future<AuthResult> registerWithApple() async {
-    _isLoading = true;
-    notifyListeners();
+    _setLoading(true);
 
     final result = await AuthService.registerWithApple();
 
-    _isLoading = false;
-    notifyListeners();
-
+    _setLoading(false);
     return result;
+  }
+
+  // Helper method for loading state
+  void _setLoading(bool loading) {
+    _isLoading = loading;
+    notifyListeners();
   }
 
   // Clear form
