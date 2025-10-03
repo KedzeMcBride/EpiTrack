@@ -334,10 +334,7 @@ class _PatientsPageState extends State<PatientsPage> {
 
         // Form with proper scrolling - REMOVED CONST
         Expanded(
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(), // Add this
-            child: PatientsForm(), // Remove const
-          ),
+          child: PatientsForm(),
         ),
       ],
     );

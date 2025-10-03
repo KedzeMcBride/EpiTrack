@@ -47,49 +47,52 @@ class _PatientsFormState extends State<PatientsForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: Stepper(
-        type: StepperType.vertical,
-        currentStep: currentStep,
-        controlsBuilder: (BuildContext context, ControlsDetails details) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: Row(
-              children: [
-                if (currentStep != 0)
+    return SingleChildScrollView( // Add SingleChildScrollView here
+      physics: const AlwaysScrollableScrollPhysics(),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        child: Stepper(
+          type: StepperType.vertical,
+          currentStep: currentStep,
+          controlsBuilder: (BuildContext context, ControlsDetails details) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Row(
+                children: [
+                  if (currentStep != 0)
+                    ElevatedButton(
+                      onPressed: details.onStepCancel,
+                      child: const Text('Back'),
+                    ),
+                  const SizedBox(width: 12),
                   ElevatedButton(
-                    onPressed: details.onStepCancel,
-                    child: const Text('Back'),
+                    onPressed: details.onStepContinue,
+                    child: Text(currentStep == 2 ? 'Submit Report' : 'Next'),
                   ),
-                const SizedBox(width: 12),
-                ElevatedButton(
-                  onPressed: details.onStepContinue,
-                  child: Text(currentStep == 2 ? 'Submit Report' : 'Next'),
-                ),
-              ],
-            ),
-          );
-        },
-        onStepCancel: () => currentStep == 0
-            ? null
-            : setState(() {
-          currentStep -= 1;
-        }),
-        onStepContinue: () {
-          bool isLastStep = (currentStep == getSteps().length - 1);
-          if (isLastStep) {
-            _showSuccessDialog();
-          } else {
-            setState(() {
-              currentStep += 1;
-            });
-          }
-        },
-        onStepTapped: (step) => setState(() {
-          currentStep = step;
-        }),
-        steps: getSteps(),
+                ],
+              ),
+            );
+          },
+          onStepCancel: () => currentStep == 0
+              ? null
+              : setState(() {
+            currentStep -= 1;
+          }),
+          onStepContinue: () {
+            bool isLastStep = (currentStep == getSteps().length - 1);
+            if (isLastStep) {
+              _showSuccessDialog();
+            } else {
+              setState(() {
+                currentStep += 1;
+              });
+            }
+          },
+          onStepTapped: (step) => setState(() {
+            currentStep = step;
+          }),
+          steps: getSteps(),
+        ),
       ),
     );
   }
