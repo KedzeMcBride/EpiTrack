@@ -332,10 +332,11 @@ class _PatientsPageState extends State<PatientsPage> {
           ),
         ),
 
-        // Form with proper scrolling
-        const Expanded(
+        // Form with proper scrolling - REMOVED CONST
+        Expanded(
           child: SingleChildScrollView(
-            child: PatientsForm(),
+            physics: const AlwaysScrollableScrollPhysics(), // Add this
+            child: PatientsForm(), // Remove const
           ),
         ),
       ],
