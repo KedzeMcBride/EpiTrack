@@ -333,7 +333,7 @@ class _PatientsPageState extends State<PatientsPage> {
         ),
 
         // Form with proper scrolling - REMOVED CONST
-        Expanded(
+        const Expanded(
           child: PatientsForm(),
         ),
       ],

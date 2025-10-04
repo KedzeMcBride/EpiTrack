@@ -40,9 +40,9 @@ class _PatientsFormState extends State<PatientsForm> {
   ];
 
   final List<Map<String, dynamic>> _conditions = [
-    {'name': 'Alive', 'emoji': '🙂'},
-    {'name': 'Critical', 'emoji': '🚨'},
-    {'name': 'Deceased', 'emoji': '⚰️'},
+    {'name': 'Alive', 'emoji': ''},
+    {'name': 'Critical', 'emoji': ''},
+    {'name': 'Deceased', 'emoji': ''},
   ];
 
   @override
